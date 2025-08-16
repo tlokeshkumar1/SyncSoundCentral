@@ -1,10 +1,18 @@
 {
   "version": 2,
-  "functions": {
-    "server/index.ts": {
-      "runtime": "@vercel/node@20.x"
+  "builds": [
+    {
+      "src": "server/index.ts",
+      "use": "@vercel/node@20.x"
+    },
+    {
+      "src": "client/**",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm run build:vercel"
+      }
     }
-  },
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
@@ -14,7 +22,5 @@
       "src": "/(.*)",
       "dest": "/dist/public/$1"
     }
-  ],
-  "outputDirectory": "dist/public",
-  "buildCommand": "npm run build:vercel"
+  ]
 }
