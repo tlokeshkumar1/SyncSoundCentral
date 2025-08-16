@@ -1,0 +1,14 @@
+version: 2
+services:
+  web:
+    source:
+      - .
+    build:
+      commands:
+        - npm install
+        - npm run build
+    start:
+      command: npm start
+    environment:
+      NODE_ENV: production
+    port: 5000
